@@ -59,6 +59,6 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            sudo pull ${{ secrets.DOCKER_USERNAME }}/infraactions
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/infraactions
             sudo docker stop $(sudo docker ps -a -q)
             sudo docker container exec $(sudo docker run --rm -d -p 5000:5000 ${{ secrets.DOCKER_USERNAME }}/infraactions) sed -i "s/ALLOWED_HOSTS = \[.*\]/ALLOWED_HOSTS = ['${{ secrets.HOST }}']/" infra_project/settings.py
